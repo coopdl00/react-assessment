@@ -21,9 +21,7 @@ class App extends Component {
       composing: this.state.composing,
       editing: this.state.editing
     }
-    console.log(this.state)
     this.setState(newState)
-    console.log(this.state)
   }
 
   handleDelete = async (id) => {
@@ -42,6 +40,31 @@ class App extends Component {
       editing: this.state.editing
     }
     this.setState(newState)
+  }
+
+  handlePost = async (e) => {
+    e.preventDefault()
+    let formName = document.querySelector('#subject').value
+    let formMessage = document.querySelector('#body').value
+    let payload = {
+      name: `${formName}`,
+      message: `${formMessage}`
+    }
+    const response = await fetch("http://cdl-messages.herokuapp.com/messages", {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+    const message = await response.json()
+    this.setState({
+      messages: [message[0], ...this.state.messages],
+      composing: this.state.composing,
+      editing: this.state.editing
+    })
+    this.toggleComposing()
   }
 
   toggleComposing = () => {
@@ -63,8 +86,8 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <ToolBar/>
-        {this.state.composing ? <Composing/> : ""}
+        <ToolBar toggleComposing={this.toggleComposing}/>
+        {this.state.composing ? <Composing handlePost={this.handlePost}/> : ""}
         {this.state.editing ? <Editing/> : ""}
         {this.state.messages.length > 0 ? <List handleDelete={this.handleDelete} messages={this.state.messages}/> : "Loading Emails"}
       </div>
