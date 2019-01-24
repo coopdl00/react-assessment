@@ -5,7 +5,11 @@ class ToolBar extends Component {
   render() {
     return (
       <div className="row">
-        <h1 className="text-center">React-Assessment</h1>
+        <h1 className="text-center">React-ssessment</h1>
+        <button className="btn btn-danger">
+          New
+          <i className="fa fa-plus"></i>
+        </button>
       </div>
     )
   }
