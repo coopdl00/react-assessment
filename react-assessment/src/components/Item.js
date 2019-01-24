@@ -24,7 +24,7 @@ class Item extends Component {
             </div>
             <div className="col-xs-2">
               <button className="btn btn-default" onClick={() => {
-                  this.props.toggleEdit()
+                  this.props.Edit(this.props.message.id)
                 }}>
                 Edit
               </button>

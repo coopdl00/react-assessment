@@ -24,7 +24,7 @@ class Composing extends Component {
         </div>
         <div className="form-group">
           <div className="col-sm-8 col-sm-offset-2">
-            <input onClick={(e) => this.props.handlePost(e)} type="submit" value="Send" className="btn btn-primary"></input>
+            <input onClick={(e) => this.props.handlePost(e)} type="submit" value="Compose" className="btn btn-primary"></input>
           </div>
         </div>
       </form>
